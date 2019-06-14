@@ -1,0 +1,17 @@
+<h4>Comments</h4>
+<div *ngIf="User">
+  <form #createCommentForm="ngForm" (ngSubmit)=createComment(createCommentForm.form.value)>
+    <textarea name="commentText" ngModel cols="30" rows="10"></textarea>
+    <input type="submit" value="Create comment">
+  </form>
+</div>
+<ul>
+  <div *ngIf="editCommentClc">
+    <app-comment-update [commentInput]="commentId"></app-comment-update>
+  </div>
+  <li *ngFor="let comment of comments" style="border: 1px solid black">{{comment.author}} - {{comment.comment}}
+    <button *ngIf="User" (click)="editClc(comment) ">Edit</button>
+
+    <button *ngIf="User" (click)="deleteComment(comment)">Delete</button>
+  </li>
+</ul>

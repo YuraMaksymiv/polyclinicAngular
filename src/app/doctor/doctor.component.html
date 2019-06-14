@@ -1,0 +1,46 @@
+<a routerLink="" style="float: right">GO HOME</a>
+<div>
+  <h2>{{doctor.name}} {{doctor.surname}}</h2>
+  <p>Phone - {{doctor.phone}}</p>
+  <p>About me:</p>
+  <p>{{doctor.description}}</p>
+  <p>My email: {{doctor.email}}</p>
+  <p>I accept in {{doctor.room_number}} cabinet on {{doctor.floor}} floor on such days: {{doctor.working_days}}</p>
+  <hr>
+      <app-comments></app-comments>
+  <hr>
+      <app-marks [doctorId]="doctor.id"></app-marks>
+</div>
+<br>
+<div *ngIf="canEdit">
+  <button (click)="editClc() ">Edit profile</button>
+  <div *ngIf="isEditClick" style="border: 1px solid black;">
+    <form #editDoctorForm="ngForm" (submit)="editDoctor(doctor.id)">
+      <label for="experience">Experience: </label>
+      <input type="text" [(ngModel)]="editDoctorData.experience" id="experience" name="experience">
+      <br>
+      <label for="description">Description: </label>
+      <input type="textarea" [(ngModel)]="editDoctorData.description" id="description" name="description">
+      <br>
+      <label for="phone">Phone: </label>
+      <input type="text" [(ngModel)]="editDoctorData.phone" id="phone" name="phone">
+      <br>
+      <label for="floor">Floor: </label>
+      <input type="text" [(ngModel)]="editDoctorData.floor" id="floor" name="floor">
+      <br>
+      <label for="room_number">Room number: </label>
+      <input type="text" [(ngModel)]="editDoctorData.room_number" id="room_number" name="room_number">
+      <br>
+      <label for="working_days">Working days: </label>
+      <input type="text" [(ngModel)]="editDoctorData.working_days" id="working_days" name="working_days">
+      <br>
+      <label for="section_id">Section</label>
+      <select name="section_id" [(ngModel)]="editDoctorData.section_id" id="section_id">
+        <option *ngFor="let section of sections" value="{{section.id}}">{{section.section}}</option>
+      </select>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+

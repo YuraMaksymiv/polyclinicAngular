@@ -1,0 +1,9 @@
+<div>
+  <ul>
+    <li *ngFor="let section of sections">
+      <a (click)="getDoctorsBySections(section.id)">{{section.section_name}}</a>
+    </li>
+
+  </ul>
+  <app-section-doctors [doctorInput]="doctors"></app-section-doctors>
+</div>

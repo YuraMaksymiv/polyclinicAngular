@@ -1,20 +1,74 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+
+<div *ngIf="!isTokenPresent">
+  <button (click)="loginClc()">LOGIN ME</button>
+  <button (click)="registerClc()">REGISTER ME</button>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div *ngIf="isTokenPresent">
+  <button (click)="logoutClc()">LOG OUT</button>
+</div>
+
+
+<div>
+  <div *ngIf="isLoginClicked">
+    <form #loginForm="ngForm" (ngSubmit)=login(loginForm.form.value)>
+      <input type="email" name="email" placeholder="example@site.com" required ngModel>
+      <input type="password" name="password" placeholder="******" required ngModel>
+      <input type="radio" ngModel id="logUser"
+             name="credentials" value="1">
+      <label for="logUser">User</label>
+
+      <input type="radio" ngModel id="logDoctor"
+             name="credentials" value="2">
+      <label for="logDoctor">Doctor</label>
+      <br>
+
+      <input type="submit" value="OK">
+    </form>
+
+  </div>
+
+
+
+  <div *ngIf="isRegisterClicked">
+    <form #registerForm="ngForm" (ngSubmit)=register(registerForm.form.value)>
+      <input type="text" name="name" placeholder="Name" required ngModel>
+      <input type="text" name="surname" placeholder="Surname" required ngModel>
+      <input type="email" name="email" placeholder="example@site.com"  required ngModel>
+      <input type="password" name="password" placeholder="******" required ngModel>
+      <input type="radio" ngModel id="regUser"
+             name="credentials" value="1">
+      <label for="regUser">User</label>
+
+      <input type="radio" ngModel id="regDoctor"
+             name="credentials" value="2">
+      <label for="regDoctor">Doctor</label>
+      <br>
+<!--        <label for="section_id">Section</label>-->
+<!--        <select name="section_id" id="section_id">-->
+<!--          <option ngModel *ngFor="let section of sections" value="{{section.id}}">{{section.section}}</option>-->
+<!--        </select>-->
+<!--      <br>-->
+      <input type="submit" value="OK">
+    </form>
+  </div>
+</div>
+
+<div>
+  <label>Doctor name: </label>
+  <label>
+    <input type="text"
+           #search
+           name = "search"
+    >
+  </label>
+  <button (click)="searchDoctors(search.value)">Search</button>
+
+  <ul>
+    <li *ngFor="let doctor of foundDoctors"><a routerLink="doctor" (click)="setDoctor(doctor.id)">{{doctor.name}} {{doctor.surname}}</a></li>
+  </ul>
+
+</div>
+
+<router-outlet></router-outlet>
+
 

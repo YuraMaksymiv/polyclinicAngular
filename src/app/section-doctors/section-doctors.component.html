@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let doctor of doctorInput">
+      <a routerLink="doctor" (click)="getIdDoctor(doctor.id)">Doctor {{doctor.name}} {{doctor.surname}}</a>
+  </li>
+</ul>

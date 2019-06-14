@@ -1,0 +1,5 @@
+
+<form #editCommentForm="ngForm" (ngSubmit)="editComment(editCommentForm.form.value, commentInput)">
+    <textarea name="commentText" ngModel="" cols="30" rows="10"></textarea>
+    <input type="submit" value="Submit">
+</form>
